@@ -7,7 +7,11 @@
  which external library is applied for this data structure.
  */
 
-function minTimeToReach(moveTime: number[][]): number {
+/**
+ * @param {number[][]} moveTime
+ * @return {number}
+ */
+var minTimeToReach = function (moveTime) {
     const UP = [-1, 0];
     const DOWN = [1, 0];
     const LEFT = [0, -1];
@@ -27,24 +31,26 @@ function minTimeToReach(moveTime: number[][]): number {
     return dijkstraSearchForPathWithMinTime(moveTime);
 };
 
-class Step {
-
-    row: number;
-    column: number;
-    timeFromStart;
-
-    constructor(row, column, timeFromStart) {
-        this.row = row;
-        this.column = column;
-        this.timeFromStart = timeFromStart;
-    }
+/**
+ * @param {number} row
+ * @param {number} column
+ * @param {number} timeFromStart
+ */
+function Step(row, column, timeFromStart) {
+    this.row = row;
+    this.column = column;
+    this.timeFromStart = timeFromStart;
 }
 
-function dijkstraSearchForPathWithMinTime(moveTime: number[][]): number {
-    const minHeapForTime = new MinPriorityQueue({ compare: (x, y) => x.timeFromStart - y.timeFromStart });
+/**
+ * @param {number[][]} moveTime
+ * @return {number}
+ */
+function dijkstraSearchForPathWithMinTime(moveTime) {
+    const minHeapForTime = new MinPriorityQueue({compare: (x, y) => x.timeFromStart - y.timeFromStart});
     minHeapForTime.enqueue(new Step(this.startRow, this.startColumn, 0));
 
-    const minTimeMatrix: number[][] = Array.from(new Array(this.rows), () => new Array(this.columns).fill(Number.MAX_SAFE_INTEGER));
+    const minTimeMatrix = Array.from(new Array(this.rows), () => new Array(this.columns).fill(Number.MAX_SAFE_INTEGER));
     minTimeMatrix[this.startRow][this.startColumn] = 0;
 
     while (!minHeapForTime.isEmpty()) {
@@ -72,6 +78,11 @@ function dijkstraSearchForPathWithMinTime(moveTime: number[][]): number {
     return minTimeMatrix[this.targetRow][this.targetColumn];
 }
 
-function isInMatrix(row: number, column: number): boolean {
+/**
+ * @param {number} row
+ * @param {number} column
+ * @return {boolean}
+ */
+function isInMatrix(row, column) {
     return row >= 0 && row < this.rows && column >= 0 && column < this.columns;
 }
